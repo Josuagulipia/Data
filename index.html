@@ -1,0 +1,147 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Informatika Quest</title>
+<style>
+:root{--bg:#0a1330;--p:#141f47;--c:#22d3ee;--v:#8b5cf6;--g:#4ade80;--t:#e8eeff;--m:#9fb0d8;--r:#f87171;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:70px}body{margin:0;background:var(--bg);color:var(--t);font:16px/1.6 "Trebuchet MS",system-ui,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#0d1840ee;border-bottom:2px solid var(--c);padding:8px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+header b{font-size:18px;color:var(--c)}header .sp{flex:1}
+button{background:var(--v);color:#fff;border:0;border-radius:8px;padding:9px 14px;font:inherit;cursor:pointer;min-height:40px}button.o{background:transparent;border:1px solid var(--c);color:var(--c)}button:disabled{opacity:.4;cursor:not-allowed}button:focus-visible,input:focus-visible{outline:3px solid var(--g)}
+input{background:#0a1330;color:var(--t);border:1px solid var(--c);border-radius:8px;padding:10px;font:inherit;width:100%;margin:6px 0}
+.wrap{max-width:900px;margin:0 auto;padding:14px}.card{background:var(--p);border:1px solid #2b3d7a;border-radius:14px;padding:16px;margin:14px 0}
+.bar{height:10px;background:#0a1330;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--g),var(--c));width:0;transition:width .5s}
+.lbl{display:inline-block;font-size:12px;font-weight:700;border-radius:5px;padding:2px 8px;background:var(--c);color:#04122e}.lbl.x{background:var(--v);color:#fff}
+.mat{font-size:var(--fs,17px);line-height:1.75}.mat h2{color:var(--c)}.mat h3{color:var(--g)}.mat .box{border-left:4px solid var(--v);padding:6px 12px;background:#0d1840;margin:12px 0}
+.ov{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:520px;margin:10px 0}td,th{border:1px solid #3a4f99;padding:7px 9px;text-align:left;vertical-align:top}th{background:#1c2c66}
+.map{display:flex;gap:10px;overflow-x:auto;padding:8px 0}.node{flex:0 0 auto;width:64px;height:64px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:#1c2c66;color:var(--c);display:grid;place-items:center;font-weight:700;border:0;cursor:pointer}.node.d{background:var(--g);color:#04122e}
+mark{background:#facc15;color:#000}.hide{display:none}#mat [data-s]{display:none}#mat [data-s].cur{display:block}.node.l{opacity:.35}.opt{display:block;width:100%;text-align:left;margin:6px 0;background:#1c2c66}.ok{background:#15803d!important}.no{background:#b91c1c!important}
+.rd{background:#f3f6ff;--bg:#f3f6ff;--p:#fff;--t:#10183a;--m:#3a4670}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<header><b>🤖 Informatika Quest</b><span id="who" class="lbl"></span><span class="sp"></span><span id="xpt"></span><button class="o" id="bm">🔊 Suara</button><button class="o" id="out">Keluar</button></header>
+<div class="wrap">
+
+<section id="login" class="card"><h1>Informatika Quest: Misi Menaklukkan Dunia Digital</h1>
+<p>Mata pelajaran Informatika · SMA · Kelas XI Fase E · Guru: Jhosua Gulipia, S.Inf.Med · SMAS Maranatha Sampit</p>
+<h3>Login Siswa</h3><input id="nm" placeholder="Nama atau nama panggilan"><input id="kc" placeholder="Kode kelas (opsional)"><button id="ls">Mulai Petualangan</button>
+<h3>Mode Guru</h3><input id="gk" type="password" placeholder="Kode akses guru"><button class="o" id="lg">Masuk Mode Guru</button><p id="err" style="color:var(--r)"></p>
+<p style="color:var(--m);font-size:14px">Prototipe: progres tersimpan di browser perangkat ini saja (localStorage), tidak tersinkron antarperangkat dan tidak aman dari manipulasi. Kode guru demo bukan keamanan sungguhan.</p></section>
+
+<section id="app" class="hide">
+<div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><b id="lv"></b><span id="bd"></span></div><div class="bar"><i id="xb"></i></div><small>Progres membaca &amp; misi: <span id="pg"></span></small>
+<div class="map" id="map"></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="q" placeholder="Cari kata dalam materi…" style="flex:1;min-width:160px"><button class="o" id="fm">A−</button><button class="o" id="fp">A+</button><button class="o" id="rm">Mode baca</button></div></div>
+
+<article class="card mat" id="mat"><span class="lbl">MATERI ASLI</span>
+<div id="m1" data-s="1"><h2>1. Mengenal Pengolahan Data</h2>
+<p>Data adalah fakta atau catatan yang dikumpulkan, misalnya angka nilai, jawaban survei, teks komentar, foto, rekaman suara, atau catatan kehadiran. Data belum tentu langsung menjawab pertanyaan. Data perlu diolah agar menjadi informasi yang bermakna.</p>
+<p>Pengolahan data adalah proses mengumpulkan, memeriksa, mengatur, menghitung, menganalisis, dan menyajikan data sehingga dapat digunakan untuk memahami keadaan, memperkirakan kemungkinan, serta mengambil keputusan.</p>
+<div class="box"><b>CONTOH SEDERHANA</b><br>Daftar nilai ulangan adalah data. Setelah nilai dihitung rata-ratanya dan dibandingkan antarkelas, kita memperoleh informasi tentang capaian belajar. Informasi itu dapat membantu guru menentukan materi yang perlu diulang.</div>
+<h3>Mengapa pengolahan data penting?</h3><ul><li>Membantu melihat keadaan berdasarkan bukti, bukan hanya dugaan.</li><li>Menemukan pola atau kecenderungan yang sulit terlihat dari banyak angka.</li><li>Membantu membandingkan beberapa pilihan.</li><li>Mendukung keputusan yang lebih tepat, selama data dan cara analisisnya baik.</li></ul>
+<p>Pengolahan data bukan sekadar memasukkan angka ke komputer. Kita harus mengetahui pertanyaan yang ingin dijawab, memastikan data layak digunakan, memilih cara analisis yang sesuai, lalu menjelaskan hasilnya secara jujur.</p></div>
+
+<div id="m2" data-s="2"><h2>2. Tahap-Tahap Mengolah Data</h2><h3>a. Mendefinisikan Permasalahan</h3>
+<p>Tahap pertama adalah menentukan masalah atau pertanyaan yang ingin dijawab. Jika masalah belum jelas, data yang dikumpulkan bisa terlalu banyak, tidak relevan, atau tidak membantu menemukan solusi.</p>
+<p>Pada tahap ini, tanyakan kepada diri sendiri:</p><ul><li>Data apa yang sudah tersedia?</li><li>Masalah apa yang ingin diketahui penyebabnya?</li><li>Siapa yang membutuhkan hasilnya?</li><li>Keputusan atau perubahan apa yang diharapkan?</li></ul>
+<div class="box"><b>Contoh kasus</b><br>OSIS ingin mengetahui mengapa kantin sekolah sering ramai pada satu waktu tertentu. Pertanyaan yang jelas misalnya: “Pada jam berapa kantin paling ramai, dan berapa lama rata-rata siswa mengantre?” Pertanyaan ini lebih berguna daripada sekadar “Bagaimana keadaan kantin?” karena menunjukkan data apa yang perlu dicatat.</div>
+<div class="box"><b>INGAT!</b><br>Pertanyaan yang baik harus jelas, dapat diperiksa menggunakan data, dan tidak langsung menganggap seseorang atau kelompok sebagai penyebab masalah.</div></div>
+
+<div id="m3" data-s="3"><h3>b. Pengumpulan Data</h3>
+<p>Setelah pertanyaan ditentukan, kumpulkan data yang relevan. Data dapat berasal dari catatan yang sudah ada atau dikumpulkan secara khusus melalui pengamatan, wawancara, survei, formulir, kuesioner, maupun umpan balik.</p>
+<p><b>Sumber data berdasarkan tempat asal</b></p><div class="ov"><table><tr><th>Jenis</th><th>Pengertian sederhana</th><th>Contoh</th></tr><tr><td>Data internal</td><td>Berasal dari dalam organisasi atau lingkungan yang diteliti.</td><td>Catatan kehadiran dan nilai siswa di sekolah.</td></tr><tr><td>Data eksternal</td><td>Berasal dari luar organisasi atau lingkungan yang diteliti.</td><td>Data cuaca dari lembaga resmi atau statistik pemerintah.</td></tr></table></div>
+<p><b>Data pihak pertama, kedua, dan ketiga</b></p><div class="ov"><table><tr><th>Jenis</th><th>Penjelasan</th><th>Contoh sederhana</th></tr><tr><td>Pihak pertama</td><td>Data dikumpulkan langsung oleh pihak yang menggunakannya untuk tujuan sendiri.</td><td>Siswa menyebarkan survei kepada teman sekelas.</td></tr><tr><td>Pihak kedua</td><td>Data yang dikumpulkan oleh pihak lain yang menjadi mitra, lalu dibagikan kepada kita.</td><td>Sekolah menerima hasil survei dari lembaga mitra.</td></tr><tr><td>Pihak ketiga</td><td>Data diperoleh dari pihak luar yang bukan pengumpul langsung untuk kita atau mitra langsung kita.</td><td>Menggunakan laporan statistik yang diterbitkan lembaga lain.</td></tr></table></div>
+<p>Pengelompokan pihak pertama, kedua, dan ketiga dapat bergantung pada hubungan antara pengumpul data dan pengguna data. Karena itu, selalu periksa siapa yang mengumpulkan data, untuk tujuan apa, dan bagaimana data tersebut diperoleh.</p>
+<p><b>Menyimpan data</b></p><p>Data yang terkumpul perlu disimpan secara teratur agar mudah diperiksa dan digunakan kembali.</p>
+<div class="ov"><table><tr><th>Media</th><th>Cocok digunakan untuk</th><th>Contoh</th></tr><tr><td>Spreadsheet</td><td>Tabel data, perhitungan, rumus, dan grafik; cocok untuk banyak pekerjaan kelas.</td><td>Microsoft Excel, Google Sheets.</td></tr><tr><td>Basis data (database)</td><td>Menyimpan dan mengelola data terstruktur dalam jumlah besar atau saling berkaitan.</td><td>Microsoft Access, MySQL, Oracle.</td></tr></table></div>
+<p>Spreadsheet tersusun dari baris, kolom, dan sel. Basis data mengatur informasi dalam struktur seperti tabel dan dapat menggunakan kueri (query) untuk mencari atau mengolah data. Tidak ada batas mutlak bahwa spreadsheet hanya untuk ribuan data; pilihan alat ditentukan oleh ukuran, kerumitan, kebutuhan kerja bersama, keamanan, dan kinerja.</p>
+<div class="box"><b>TIPS MENGUMPULKAN DATA</b><br>Catat tanggal pengumpulan, sumber, cara pengumpulan, dan satuan yang digunakan. Mintalah izin jika diperlukan dan jangan mengumpulkan informasi pribadi yang tidak dibutuhkan.</div></div>
+
+<div id="m4" data-s="4"><h3>c. Pembersihan Data</h3>
+<p>Data yang dikumpulkan sering belum siap dianalisis. Mungkin ada nama yang ditulis berbeda, data tercatat dua kali, sel kosong, format tanggal tidak seragam, atau jawaban yang tidak sesuai dengan pertanyaan. Pembersihan data adalah proses memeriksa dan memperbaiki masalah tersebut.</p>
+<p><b>Masalah yang sering ditemukan</b></p><div class="ov"><table><tr><th>Masalah</th><th>Contoh</th><th>Cara menangani</th></tr><tr><td>Duplikasi</td><td>Nama siswa yang sama tercatat dua kali untuk kejadian yang sama.</td><td>Periksa sumber lalu hapus catatan ganda yang benar-benar duplikat.</td></tr><tr><td>Format tidak konsisten</td><td>Tanggal ditulis 4/10/2026 dan 04 Oktober 2026.</td><td>Samakan format tanggal.</td></tr><tr><td>Kesalahan penulisan</td><td>“Hadir”, “hadir ”, dan “Hdir” digunakan untuk status yang sama.</td><td>Periksa sumber dan seragamkan kategori.</td></tr><tr><td>Data kosong</td><td>Kolom durasi antrean tidak terisi.</td><td>Cari data aslinya atau tandai sebagai kosong; jangan menebak.</td></tr><tr><td>Data tidak relevan</td><td>Survei kantin memuat informasi yang tidak berhubungan dengan antrean.</td><td>Tinjau apakah data itu diperlukan untuk menjawab pertanyaan.</td></tr></table></div>
+<p>Data bersih membantu analisis menjadi lebih dapat dipercaya. Namun, membersihkan data bukan berarti menghapus semua nilai yang berbeda dari kebanyakan data. Nilai yang tampak tidak biasa bisa saja benar dan justru penting.</p>
+<p><b>Apa itu bias?</b></p><p>Bias adalah kecenderungan dalam pengumpulan, pemilihan, atau penafsiran data yang membuat hasil tidak mewakili keadaan secara adil. Misalnya, sekolah ingin mengetahui pendapat seluruh siswa tentang kantin, tetapi survei hanya dibagikan kepada siswa yang sedang berada di kantin. Siswa yang jarang ke kantin tidak terwakili.</p>
+<ul><li>Libatkan kelompok yang relevan, bukan hanya kelompok yang mudah dijangkau.</li><li>Gunakan pertanyaan yang netral, tidak menggiring jawaban.</li><li>Jelaskan keterbatasan data dan jangan menyembunyikan data yang tidak sesuai harapan.</li></ul>
+<div class="box"><b>BEDAKAN!</b><br>Kesalahan data perlu diperbaiki berdasarkan bukti. Data yang tidak mendukung dugaan kita tidak boleh dihapus hanya karena hasilnya tidak sesuai keinginan.</div></div>
+
+<div id="m5" data-s="5"><h3>d. Analisis Data</h3>
+<p>Analisis data adalah kegiatan memeriksa, menghitung, membandingkan, dan mencari pola dari data yang sudah dibersihkan. Tujuannya adalah menemukan jawaban yang masuk akal terhadap pertanyaan awal.</p>
+<p><b>Contoh analisis sederhana</b></p><p>Misalnya, lima siswa mencatat lama antrean kantin dalam menit: 4, 6, 5, 10, dan 5.</p>
+<div class="ov"><table><tr><th>Ukuran</th><th>Cara menghitung</th><th>Hasil</th></tr><tr><td>Jumlah data</td><td>Ada lima catatan.</td><td>5 catatan</td></tr><tr><td>Rata-rata</td><td>(4 + 6 + 5 + 10 + 5) ÷ 5</td><td>6 menit</td></tr><tr><td>Nilai minimum</td><td>Nilai terkecil</td><td>4 menit</td></tr><tr><td>Nilai maksimum</td><td>Nilai terbesar</td><td>10 menit</td></tr></table></div>
+<p>Dari contoh tersebut, rata-rata waktu antrean adalah 6 menit. Waktu terlama 10 menit perlu diperiksa lebih lanjut: apakah terjadi pada jam istirahat yang lebih ramai, karena petugas berkurang, atau karena faktor lain? Data ini belum cukup untuk memastikan penyebabnya.</p>
+<p><b>Alat untuk menganalisis data</b></p><ul><li>Excel atau Google Sheets: menggunakan rumus, mengurutkan data, membuat tabel pivot, dan menghitung ringkasan.</li><li>Basis data: menggunakan tabel dan query untuk mencari, menyaring, serta menghitung data.</li><li>Python dan R: bahasa pemrograman yang dapat membantu analisis lebih lanjut, terutama ketika data besar atau prosesnya perlu diulang.</li></ul>
+<p>Contoh rumus spreadsheet: <code>=AVERAGE(B2:B6)</code> untuk menghitung rata-rata angka pada sel B2 sampai B6; <code>=MIN(B2:B6)</code> untuk nilai terkecil; dan <code>=MAX(B2:B6)</code> untuk nilai terbesar. Nama fungsi dan pemisah rumus tertentu dapat berbeda menurut aplikasi atau pengaturan bahasa.</p>
+<div class="box"><b>JANGAN TERBURU-BURU MENYIMPULKAN</b><br>Pola atau hubungan dua hal tidak selalu membuktikan bahwa salah satunya menjadi penyebab yang lain. Periksa konteks, jumlah data, cara pengumpulan, dan kemungkinan faktor lain.</div></div>
+
+<div id="m6" data-s="6"><h3>e. Visualisasi Data</h3>
+<p>Visualisasi data adalah penyajian data dalam bentuk gambar yang membantu orang melihat perbandingan, perubahan, pola, atau komposisi dengan lebih cepat. Bentuknya dapat berupa diagram batang, diagram garis, diagram lingkaran, peta, atau grafik lainnya.</p>
+<p><b>Memilih visualisasi yang sesuai</b></p><div class="ov"><table><tr><th>Bentuk visual</th><th>Kegunaan utama</th><th>Contoh</th></tr><tr><td>Diagram batang</td><td>Membandingkan jumlah antarkategori.</td><td>Jumlah siswa yang memilih ekstrakurikuler.</td></tr><tr><td>Diagram garis</td><td>Menunjukkan perubahan dari waktu ke waktu.</td><td>Jumlah pengunjung perpustakaan setiap bulan.</td></tr><tr><td>Diagram lingkaran</td><td>Menunjukkan bagian dari keseluruhan jika kategori sedikit dan totalnya jelas.</td><td>Persentase pilihan menu kantin.</td></tr><tr><td>Tabel</td><td>Menampilkan nilai rinci yang perlu dibaca secara tepat.</td><td>Daftar nilai dan kehadiran.</td></tr><tr><td>Diagram sebar</td><td>Melihat pola hubungan antara dua variabel numerik.</td><td>Hubungan waktu belajar dan nilai, tanpa langsung menyatakan sebab-akibat.</td></tr></table></div>
+<p>Alat yang dapat digunakan antara lain grafik di Excel atau Google Sheets, Tableau, Looker, serta pustaka visualisasi pada Python dan R. Pilih alat berdasarkan kebutuhan; untuk tugas kelas sederhana, spreadsheet biasanya sudah memadai.</p>
+<p><b>Ciri visualisasi yang baik</b></p><ul><li>Memiliki judul yang menjelaskan isi grafik.</li><li>Memiliki label dan satuan yang jelas.</li><li>Menggunakan skala yang tidak menyesatkan.</li><li>Warna mudah dibedakan dan tidak berlebihan.</li><li>Menampilkan data yang relevan dan mencantumkan sumber bila diperlukan.</li></ul>
+<div class="box"><b>CONTOH PILIHAN</b><br>Jika ingin membandingkan jumlah siswa yang datang terlambat pada Senin, Selasa, Rabu, Kamis, dan Jumat, diagram batang cocok. Jika ingin melihat perubahan keterlambatan selama beberapa bulan, diagram garis bisa lebih membantu.</div></div>
+
+<div id="m7" data-s="7"><h3>f. Presentasi Data</h3>
+<p>Presentasi atau penyajian data adalah tahap menyampaikan hasil analisis agar dapat dipahami dan digunakan oleh orang lain. Penyajian dapat berupa laporan tertulis, slide presentasi, poster, infografis, atau dasbor interaktif.</p>
+<p>Visualisasi dan presentasi saling berkaitan, tetapi tidak sama. Visualisasi adalah bentuk grafik atau gambar yang menampilkan data. Presentasi data mencakup pemilihan visual, penjelasan temuan, penekanan pada hal penting, dan rekomendasi yang sesuai dengan bukti.</p>
+<p><b>Susunan presentasi data yang sederhana</b></p>
+<ol><li>Masalah atau pertanyaan: jelaskan apa yang ingin diketahui.</li><li>Sumber dan cara pengumpulan data: terangkan dari mana data berasal.</li><li>Hasil utama: tampilkan angka, tabel, atau grafik yang paling relevan.</li><li>Penafsiran: jelaskan arti temuan tanpa melebih-lebihkan.</li><li>Kesimpulan dan saran: usulkan langkah yang didukung oleh data.</li><li>Keterbatasan: sebutkan hal yang belum dapat dipastikan dari data yang tersedia.</li></ol></div>
+</article>
+
+<div class="card" id="tc"></div>
+<div style="display:flex;justify-content:space-between;gap:8px"><button class="o" id="pv">◀ Sebelumnya</button><button id="nx">Berikutnya ▶</button></div>
+<div class="card" id="boss"><span class="lbl x">BOSS CHALLENGE</span> <h2>Master Data</h2><p id="bs"></p><button id="bgo">Lawan Boss</button><div id="bg"></div></div>
+</section>
+
+<section id="gur" class="hide"><div class="card"><span class="lbl">MODE GURU</span><h2>Dashboard Guru</h2><p>Akses bebas: materi (di halaman siswa) dan Boss terbuka tanpa menyelesaikan misi. Kunci jawaban Boss: urutan tahap = Mendefinisikan Permasalahan → Pengumpulan Data → Pembersihan Data → Analisis Data → Visualisasi Data → Presentasi Data; pernyataan salah: lihat pembahasan setelah bermain.</p><button id="gb">Uji Boss (pratinjau)</button> <button class="o" id="gm">Lihat materi</button>
+<h3>Laporan siswa di perangkat ini</h3><div class="ov"><table id="rep"></table></div><button class="o" id="csv">Ekspor CSV</button></div></section>
+</div>
+<script>
+const $=id=>document.getElementById(id),S=localStorage;let U=null,T=false,snd=true,fs=17;
+const ST=["Mendefinisikan Permasalahan","Pengumpulan Data","Pembersihan Data","Analisis Data","Visualisasi Data","Presentasi Data"];
+const NM=["1. Mengenal Pengolahan Data","a. Mendefinisikan Permasalahan","b. Pengumpulan Data","c. Pembersihan Data","d. Analisis Data","e. Visualisasi Data","f. Presentasi Data"];
+const Q=[{q:"Detektif Kesalahan: pernyataan mana yang SALAH menurut materi?",o:["Data kosong sebaiknya dicari data aslinya, bukan ditebak.","Data yang tidak mendukung dugaan boleh dihapus agar hasil sesuai harapan.","Diagram garis cocok untuk perubahan dari waktu ke waktu.","Rata-rata dari 4, 6, 5, 10, 5 adalah 6 menit."],a:1,e:"Data yang tidak mendukung dugaan tidak boleh dihapus hanya karena hasilnya tidak sesuai keinginan (bagian Pembersihan Data)."},
+{q:"Analisis kasus: survei kantin hanya dibagikan kepada siswa yang sedang berada di kantin. Masalah apa yang muncul?",o:["Duplikasi data","Bias: siswa yang jarang ke kantin tidak terwakili","Format tanggal tidak konsisten","Kesalahan rumus spreadsheet"],a:1,e:"Itu contoh bias pada bagian Pembersihan Data."}];
+const pk=n=>"iq:"+n,ld=n=>JSON.parse(S[pk(n)]||'{"read":[],"ok":[],"xp":0,"boss":false,"tries":0}'),sv=()=>{if(!T)S[pk(U.n)]=JSON.stringify(U.d)};
+function beep(f){if(!snd)return;try{const c=new AudioContext(),o=c.createOscillator(),g=c.createGain();o.frequency.value=f;g.gain.value=.05;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.12)}catch(e){}}
+function show(id){["login","app","gur"].forEach(x=>$(x).classList.toggle("hide",x!=id))}
+function start(n,t){U={n,d:ld(n)};T=t;$("who").textContent=(t?"Guru":n);show(t?"gur":"app");render()}
+$("ls").onclick=()=>{const n=$("nm").value.trim();if(!n){$("err").textContent="Isi nama dulu.";return}beep(600);start(n,false)};
+$("lg").onclick=()=>{if($("gk").value==="guru"){beep(600);U={n:"guru",d:{read:[],ok:[],xp:0,boss:false,tries:0}};T=true;$("who").textContent="Guru";show("gur");report()}else $("err").textContent="Kode salah."};
+$("out").onclick=()=>{U=null;T=false;pg=1;$("who").textContent="";show("login")};
+$("bm").onclick=()=>{snd=!snd;$("bm").textContent=snd?"🔊 Suara":"🔇 Mati"};
+$("fp").onclick=()=>{fs=Math.min(26,fs+2);document.documentElement.style.setProperty("--fs",fs+"px")};$("fm").onclick=()=>{fs=Math.max(14,fs-2);document.documentElement.style.setProperty("--fs",fs+"px")};
+$("rm").onclick=()=>document.body.classList.toggle("rd");
+$("gm").onclick=()=>{T=true;show("app");render()};
+$("gb").onclick=()=>{T=true;show("app");render();$("bgo").click()};
+function lvl(x){return 1+Math.floor(x/100)}
+const C=[0,
+{q:"Daftar nilai ulangan dihitung rata-ratanya dan dibandingkan antarkelas. Hasilnya menurut materi disebut apa?",o:["Basis data","Informasi tentang capaian belajar","Bias","Data mentah"],a:1,e:"Data perlu diolah agar menjadi informasi yang bermakna (bagian 1)."},
+{q:"Manakah pertanyaan yang jelas menurut contoh kasus OSIS?",o:["Bagaimana keadaan kantin?","Siapa siswa yang membuat kantin ramai?","Pada jam berapa kantin paling ramai, dan berapa lama rata-rata siswa mengantre?","Mengapa kantin tidak bagus?"],a:2,e:"Pertanyaan yang baik jelas, dapat diperiksa dengan data, dan tidak menyalahkan kelompok tertentu (bagian a)."},
+{q:"Sekolah menerima hasil survei dari lembaga mitra. Data ini termasuk...",o:["Data pihak pertama","Data pihak ketiga","Data pihak kedua","Data kosong"],a:2,e:"Pihak kedua: dikumpulkan pihak mitra lalu dibagikan kepada kita (bagian b)."},
+{q:"Kolom durasi antrean tidak terisi. Cara menangani menurut materi?",o:["Menebak nilainya","Cari data aslinya atau tandai sebagai kosong","Mengisi dengan rata-rata","Menghapus seluruh data"],a:1,e:"Jangan menebak (bagian c)."},
+{q:"Lama antrean: 4, 6, 5, 10, dan 5 menit. Berapa rata-rata, dan apa yang dilakukan pada nilai 10?",o:["5 menit; dihapus","6 menit; dihapus","10 menit; diabaikan","6 menit; diperiksa lebih lanjut penyebabnya"],a:3,e:"(4+6+5+10+5) ÷ 5 = 6. Nilai 10 perlu diperiksa, belum cukup untuk memastikan penyebabnya (bagian d)."},
+{q:"Membandingkan jumlah siswa terlambat pada Senin sampai Jumat paling cocok dengan...",o:["Diagram garis","Diagram lingkaran","Diagram sebar","Diagram batang"],a:3,e:"Diagram batang membandingkan jumlah antarkategori (bagian e)."},
+{q:"Manakah susunan presentasi data yang sederhana?",o:["Kesimpulan, masalah, hasil, sumber, penafsiran, keterbatasan","Hasil, masalah, sumber, saran, penafsiran, keterbatasan","Masalah, sumber, hasil utama, penafsiran, kesimpulan dan saran, keterbatasan","Sumber, masalah, penafsiran, hasil, keterbatasan, saran"],a:2,e:"Lihat daftar bernomor di bagian f."}];
+let pg=1;
+const acc=i=>i==1||T||U.d.ok.includes(i-1);
+function go(i){if(i<1||i>7)return;if(!acc(i)){beep(200);return}pg=i;render();scrollTo(0,0)}
+$("pv").onclick=()=>go(pg-1);$("nx").onclick=()=>go(pg+1);
+function render(){const d=U.d;d.ok=d.ok||[];const n=d.ok.length;$("lv").textContent="Level "+lvl(d.xp)+" · "+d.xp+" XP";$("xpt").textContent=d.xp+" XP";$("xb").style.width=(d.xp%100)+"%";$("pg").textContent=n+"/7 bagian selesai · sekarang: "+NM[pg-1];$("bd").textContent=d.boss?"🏅 Master Data":"";
+$("map").innerHTML=NM.map((x,i)=>`<button class="node ${d.ok.includes(i+1)?'d':''} ${acc(i+1)?'':'l'}" title="${x}${acc(i+1)?'':' (terkunci)'}" onclick="go(${i+1})">${acc(i+1)?i+1:'🔒'}</button>`).join("");
+document.querySelectorAll("#mat [data-s]").forEach(e=>e.classList.toggle("cur",e.dataset.s==pg));
+const done=d.ok.includes(pg),c=C[pg];
+$("tc").innerHTML=`<span class="lbl x">TANTANGAN</span> <b>${NM[pg-1]}</b>`+(done?`<p>✅ Tantangan selesai. ${pg<7?"Materi berikutnya sudah terbuka.":"Semua materi selesai, Boss terbuka."}</p>`:`<p>${c.q}</p>`+c.o.map((o,i)=>`<button class="opt" onclick="cans(${i},this)">${o}</button>`).join("")+`<p id="fb"></p><small>Jawab benar untuk membuka materi berikutnya (+20 XP). Boleh mengulang.</small>`);
+$("pv").disabled=pg==1;$("nx").disabled=pg==7||!(done||T);
+const ok=n==7||T;$("bgo").disabled=!ok;$("bs").textContent=ok?"Boss terbuka! Susun tahap, temukan kesalahan. Kamu punya 3 nyawa.":"Boss terkunci: selesaikan tantangan 7 materi.";}
+function cans(i,b){const c=C[pg];if(i==c.a){b.classList.add("ok");beep(900);if(!U.d.ok.includes(pg)){U.d.ok.push(pg);if(!T)U.d.xp+=20;sv()}setTimeout(render,900)}else{b.classList.add("no");beep(200);$("fb").textContent="Belum tepat. "+c.e+" Baca materi lagi lalu coba pilihan lain."}}
+$("q").oninput=e=>{const w=e.target.value.trim().toLowerCase(),m0=$("mat"),m=m0.querySelector("[data-s].cur");m0.querySelectorAll("mark").forEach(k=>k.replaceWith(k.textContent));m0.normalize();if(!w||!m)return;const it=document.createTreeWalker(m,4),L=[];while(it.nextNode())L.push(it.currentNode);let f=0;L.forEach(t=>{const i=t.data.toLowerCase().indexOf(w);if(i<0)return;const r=t.splitText(i);r.splitText(w.length);const k=document.createElement("mark");k.textContent=r.data;r.replaceWith(k);if(!f++)k.scrollIntoView({block:"center"})})};
+let lives,seq,sh,qi;
+$("bgo").onclick=()=>{lives=3;seq=[];sh=ST.map((x,i)=>[x,i]).sort(()=>Math.random()-.5);qi=0;stage1()};
+function stage1(){$("bg").innerHTML=`<h3>Tahap 1 — Susun urutan tahap mengolah data</h3><p>Nyawa: ${"❤️".repeat(lives)}</p><p>Urutanmu: <b>${seq.map(i=>ST[i]).join(" → ")||"(kosong)"}</b></p>`+sh.filter(s=>!seq.includes(s[1])).map(s=>`<button class="opt" onclick="pick(${s[1]})">${s[0]}</button>`).join("")+`<button class="o" onclick="seq=[];stage1()">Ulang urutan</button>`}
+function pick(i){beep(500);seq.push(i);if(seq.length<6)return stage1();if(seq.every((v,k)=>v==k)){beep(900);stage2()}else{lives--;beep(200);seq=[];if(lives<=0)return lose();$("bg").innerHTML=`<p style="color:var(--r)">Urutan salah. Baca lagi bagian 2 (a–f). Nyawa tersisa ${lives}.</p>`;setTimeout(stage1,1400)}}
+function stage2(){const x=Q[qi];$("bg").innerHTML=`<h3>Tahap ${qi+2}</h3><p>Nyawa: ${"❤️".repeat(lives)}</p><p>${x.q}</p>`+x.o.map((o,i)=>`<button class="opt" onclick="ans(${i},this)">${o}</button>`).join("")}
+function ans(i,b){const x=Q[qi];if(i==x.a){b.classList.add("ok");beep(900);qi++;setTimeout(()=>qi<Q.length?stage2():win(),900)}else{b.classList.add("no");beep(200);lives--;$("bg").insertAdjacentHTML("beforeend",`<p>${x.e}</p>`);if(lives<=0)setTimeout(lose,1500)}}
+function win(){if(!T&&!U.d.boss){U.d.boss=true;U.d.xp+=100;sv();render()}$("bg").innerHTML=`<h3>🏆 Master Data dikalahkan!</h3><p>${T?"Pratinjau: tidak dicatat.":"+100 XP dan lencana Master Data."}</p>`}
+function lose(){if(!T){U.d.tries++;sv()}$("bg").innerHTML=`<h3>Boss menang kali ini</h3><p>Progres belajarmu tidak hilang. Baca ulang materi lalu coba lagi.</p><button onclick="$('bgo').click()">Coba lagi</button>`}
+function report(){const r=[["Nama","XP","Bagian dibaca","Boss","Percobaan gagal"]];for(let i=0;i<S.length;i++){const k=S.key(i);if(k.startsWith("iq:")){const d=JSON.parse(S[k]);r.push([k.slice(3),d.xp,(d.ok||[]).length+"/7",d.boss?"Kalah":"Belum",d.tries])}}
+window.R=r;$("rep").innerHTML=r.map((x,i)=>"<tr>"+x.map(c=>i?`<td>${c}</td>`:`<th>${c}</th>`).join("")+"</tr>").join("")}
+$("csv").onclick=()=>{const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(R.map(r=>r.join(",")).join("\n"));a.download="laporan.csv";a.click()};
+</script></body></html>
